@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母亲节快乐 - 专属惊喜</title>
+    <style>
+        :root {
+            --primary-color: #ff758c;
+            --secondary-color: #ff7eb3;
+            --bg-color: #fef1f2;
+            --text-color: #4a4a4a;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 动态背景爱心 */
+        .heart-particle {
+            position: absolute;
+            color: rgba(255, 117, 140, 0.6);
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* 3D 卡片容器 */
+        .container {
+            perspective: 1000px;
+            width: 90%;
+            max-width: 400px;
+            height: 550px;
+            z-index: 10;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+        }
+
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            border: 8px solid white;
+            box-sizing: border-box;
+        }
+
+        /* 正面样式 - 封面 */
+        .card-front {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .card-front h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-open {
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: white;
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 反面样式 - 内容 */
+        .card-back {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .photo-frame {
+            width: 120px;
+            height: 120px;
+            background: #eee;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 4px solid var(--bg-color);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame svg {
+            width: 60px;
+            fill: var(--primary-color);
+        }
+
+        .wishes h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .message-line {
+            opacity: 0;
+            transform: translateY(10px);
+            margin: 12px 0;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .is-flipped .message-line {
+            animation: fadeInSlide 0.8s forwards;
+        }
+
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signature {
+            margin-top: auto;
+            font-style: italic;
+            color: #888;
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            cursor: pointer;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card" id="card" onclick="flipCard()">
+            <div class="card-face card-front">
+                <div style="font-size: 50px; margin-bottom: 20px;">💐</div>
+                <h1>母亲节快乐</h1>
+                <p>献给世界上最伟大的妈妈</p>
+                <div class="btn-open">点击开启惊喜</div>
+            </div>
+
+            <div class="card-face card-back">
+                <div class="photo-frame">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                </div>
+                <div class="wishes">
+                    <h2>亲爱的妈妈：</h2>
+                    <p class="message-line" style="animation-delay: 0.5s;">时光荏苒，您用温柔撑起了我的世界。</p>
+                    <p class="message-line" style="animation-delay: 1.3s;">虽然我最近忙于科研和学业，</p>
+                    <p class="message-line" style="animation-delay: 2.1s;">但您的牵挂始终是我前进最强的动力。</p>
+                    <p class="message-line" style="animation-delay: 2.9s;">愿所有的幸福和快乐都与您相伴！</p>
+                    <p class="message-line"
+                        style="animation-delay: 3.7s; font-weight: bold; color: var(--primary-color);">永远爱您的孩子</p>
+                </div>
+                <div class="signature">2026年5月10日</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 翻转卡片
+        function flipCard() {
+            document.getElementById('card').classList.toggle('is-flipped');
+        }
+
+        // 创建飘落爱心
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+
+</html>
